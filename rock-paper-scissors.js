@@ -15,7 +15,7 @@ function getComputerChoice() {
 // Gets human choice by prompting an answer between rock, paper,
 // and scissors (case insensitive)
 function getHumanChoice() {
-  let humanChoice = prompt("Choose your weapon");
+  let humanChoice = prompt("Choose between Rock, Paper or Scissors (case insensitive)");
   humanChoice = humanChoice.toUpperCase();
 
   if (humanChoice === "ROCK") {
@@ -73,16 +73,26 @@ function playGame() {
 
   for (let i = 1; i <= 5; i++) {
     console.log("Round: " + i);
-    const round = playRound(getHumanChoice(), getComputerChoice());
+    const humanSelection = getHumanChoice();
+    const computerSelection = getComputerChoice();
+    let round = playRound(humanSelection, computerSelection);
 
     if (round === "COMPUTER") {
-      computerScore += 1;
+      computerScore++;
     } else if (round === "PLAYER") {
-      playerScore += 1;
+      playerScore++;
     }
 
-    console.log(playerScore);
-    console.log(computerScore);
+    console.log("Player score: " + playerScore);
+    console.log("Computer score: " + computerScore);
+  }
+
+  if (playerScore > computerScore) {
+    console.log(`Final result: You win! ${playerScore} - ${computerScore}`)
+  } else if (playerScore < computerScore) {
+    console.log(`Final result: You lose! ${playerScore} - ${computerScore}`)
+  } else {
+    console.log(`Final result: It's a tie!`)
   }
 }
 
